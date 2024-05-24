@@ -1,0 +1,27 @@
+{
+  "name": "typespec-template",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node ./build-utils/watch.js",
+    "build": "node ./build-utils/build.js",
+    "lint": "eslint --fix src/**/*.{ts,js,tsx,jsx,json}",
+    "format": "prettier --write src/**/*.{ts,js,tsx,jsx,json}"
+  },
+  "dependencies": {
+    "@typespec/compiler": "latest",
+    "@typespec/http": "latest",
+    "@typespec/openapi3": "latest"
+  },
+  "private": true,
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^2.8.8"
+  }
+}

@@ -1,0 +1,161 @@
+openapi: 3.0.0
+info:
+  title: Main Service
+  version: 0.0.0
+tags:
+  - name: Auth
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      operationId: Interface_login
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - success
+                properties:
+                  data:
+                    type: string
+                  success:
+                    type: boolean
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shared.APIBadRequestResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthSpec.LoginRequest'
+  /auth/logout:
+    post:
+      tags:
+        - Auth
+      operationId: AuthedInterface_logout
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - success
+                properties:
+                  success:
+                    type: boolean
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shared.APIBadRequestResponse'
+        '401':
+          description: Access is unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shared.APIUnauthorizedResponse'
+      security:
+        - BearerAuth: []
+  /auth/profile:
+    get:
+      tags:
+        - Auth
+      operationId: AuthedInterface_getProfile
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - success
+                properties:
+                  data:
+                    $ref: '#/components/schemas/AuthSpec.Profile'
+                  success:
+                    type: boolean
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shared.APIBadRequestResponse'
+        '401':
+          description: Access is unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shared.APIUnauthorizedResponse'
+      security:
+        - BearerAuth: []
+components:
+  schemas:
+    AuthSpec.LoginRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    AuthSpec.Profile:
+      type: object
+      required:
+        - name
+        - username
+      properties:
+        name:
+          type: string
+        username:
+          type: string
+    Shared.APIBadRequestResponse:
+      type: object
+      required:
+        - message
+        - success
+      properties:
+        message:
+          type: string
+          enum:
+            - Bad Request
+        success:
+          type: boolean
+    Shared.APIUnauthorizedResponse:
+      type: object
+      required:
+        - message
+        - success
+      properties:
+        message:
+          type: string
+          enum:
+            - Unauthorized
+        success:
+          type: boolean
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+servers:
+  - url: http://localhost:3000
+    description: MainServer
+    variables: {}
