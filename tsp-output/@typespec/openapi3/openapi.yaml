@@ -9,7 +9,7 @@ paths:
     post:
       tags:
         - Auth
-      operationId: Interface_login
+      operationId: AuthSpecInterface_login
       parameters: []
       responses:
         '200':
@@ -42,7 +42,7 @@ paths:
     post:
       tags:
         - Auth
-      operationId: AuthedInterface_logout
+      operationId: AuthSpecAuthedInterface_logout
       parameters: []
       responses:
         '200':
@@ -74,7 +74,7 @@ paths:
     get:
       tags:
         - Auth
-      operationId: AuthedInterface_getProfile
+      operationId: AuthSpecAuthedInterface_getProfile
       parameters: []
       responses:
         '200':

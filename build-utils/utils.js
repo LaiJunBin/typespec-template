@@ -155,7 +155,7 @@ using Shared;
           write(value.route, indent + 2)
         }
         write(
-          `interface Interface extends ${value.namespace}.Interface {}`,
+          `interface ${key}Interface extends ${value.namespace}.Interface {}`,
           indent + 2
         )
       }
@@ -172,7 +172,7 @@ using Shared;
         }
         write(`@useAuth(Authorization)`, indent + 2)
         write(
-          `interface AuthedInterface extends ${value.namespace}.AuthedInterface {}`,
+          `interface ${key}AuthedInterface extends ${value.namespace}.AuthedInterface {}`,
           indent + 2
         )
       }

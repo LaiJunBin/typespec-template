@@ -95,12 +95,12 @@ and two interface definitions, `Interface` and `AuthedInterface`, so it will gen
 namespace AuthSpecImpl {
   @tag("Auth")
   @route("/auth")
-  interface Interface extends AuthSpec.Interface {}
+  interface AuthSpecInterface extends AuthSpec.Interface {}
 
   @tag("Auth")
   @route("/auth")
   @useAuth(Authorization)
-  interface AuthedInterface extends AuthSpec.AuthedInterface {}
+  interface AuthSpecAuthedInterface extends AuthSpec.AuthedInterface {}
 }
 ```
 
@@ -116,7 +116,7 @@ Finally, generate openapi.yaml file:
 ```yaml
 openapi: 3.0.0
 info:
-  title: Web Judge API!
+  title: Main Service
   version: 0.0.0
 tags:
   - name: Auth
@@ -125,7 +125,7 @@ paths:
     post:
       tags:
         - Auth
-      operationId: Interface_login
+      operationId: AuthSpecInterface_login
       parameters: []
       responses:
         '200':
@@ -158,7 +158,7 @@ paths:
     post:
       tags:
         - Auth
-      operationId: AuthedInterface_logout
+      operationId: AuthSpecAuthedInterface_logout
       parameters: []
       responses:
         '200':
@@ -190,7 +190,7 @@ paths:
     get:
       tags:
         - Auth
-      operationId: AuthedInterface_getProfile
+      operationId: AuthSpecAuthedInterface_getProfile
       parameters: []
       responses:
         '200':
@@ -272,8 +272,8 @@ components:
       type: http
       scheme: bearer
 servers:
-  - url: http://localhost:8000
-    description: Simple Web Server
+  - url: http://localhost:3000
+    description: MainServer
     variables: {}
 ```
 

@@ -19,10 +19,10 @@ namespace MainService;
 namespace AuthSpecImpl {
   @tag("Auth")
   @route("/auth")
-  interface Interface extends AuthSpec.Interface {}
+  interface AuthSpecInterface extends AuthSpec.Interface {}
 
   @tag("Auth")
   @route("/auth")
   @useAuth(Authorization)
-  interface AuthedInterface extends AuthSpec.AuthedInterface {}
+  interface AuthSpecAuthedInterface extends AuthSpec.AuthedInterface {}
 }
